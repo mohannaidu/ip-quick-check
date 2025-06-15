@@ -1,39 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IP Quick Check</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Quick Check – Instantly Find Your Public IP Address</title>
+  <meta name="description" content="Get your public IP address instantly with IP Quick Check. No clutter, no tracking – just your IP.">
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "IP Quick Check",
+      "url": "https://ipquickcheck.com/"
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #2c3e50;
+    }
 
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: "AIzaSyDxi2Q70iiPetw0aovFBTxKXYXUBiCGRS0",
-        authDomain: "ip-quick-check.firebaseapp.com",
-        projectId: "ip-quick-check",
-        storageBucket: "ip-quick-check.firebasestorage.app",
-        messagingSenderId: "747168378897",
-        appId: "1:747168378897:web:e0079ad15b3671912901b0",
-        measurementId: "G-6WP8Z70VY3"
-      };
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-    </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0.2rem 0;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #666;
+      margin: 0.5rem 0 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .label {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ip-value {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: fadeIn 0.6s ease-in-out;
+      word-break: break-word;
+    }
+
+    .copy-btn {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #0056b3;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDxi2Q70iiPetw0aovFBTxKXYXUBiCGRS0",
+      authDomain: "ip-quick-check.firebaseapp.com",
+      projectId: "ip-quick-check",
+      storageBucket: "ip-quick-check.firebasestorage.app",
+      messagingSenderId: "747168378897",
+      appId: "1:747168378897:web:e0079ad15b3671912901b0",
+      measurementId: "G-6WP8Z70VY3"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>IP Quick Check</h1>
+      <p>Instantly find your public IPv4 address – no clutter, no tracking.</p>
+    </header>
+
+    <div class="card">
+      <div class="label">Your IPv4 Address</div>
+      <div class="ip-value" id="ipAddress">Loading...</div>
+      <button class="copy-btn" onclick="copyIP()">Copy</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to fetch with timeout
+    function fetchWithTimeout(url, options = {}, timeout = 5000) {
+      return Promise.race([
+        fetch(url, options),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), timeout)
+        )
+      ]);
+    }
+
+    // Function to get the user's IPv4 address with multiple fallback services
+    async function getIPAddress() {
+      // Array of IP API services to try in order
+      const ipServices = [
+        { url: 'https://api.ipify.org?format=json', parser: data => data.ip },
+        { url: 'https://api.ip.sb/jsonip', parser: data => data.ip },
+        { url: 'https://api.myip.com', parser: data => data.ip },
+        { url: 'https://ipinfo.io/json', parser: data => data.ip },
+        { url: 'https://api64.ipify.org?format=json', parser: data => data.ip } // IPv6 fallback
+      ];
+
+      const ipDisplay = document.getElementById('ipAddress');
+
+      // Try each service until one succeeds
+      for (const service of ipServices) {
+        try {
+          console.log(`Trying to fetch IP from ${service.url}`);
+          const response = await fetchWithTimeout(service.url);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const ip = service.parser(data);
+
+          // Display the IP address
+          ipDisplay.textContent = ip;
+          console.log(`Successfully fetched IP from ${service.url}: ${ip}`);
+          return; // Exit the function if successful
+        } catch (error) {
+          console.error(`Error fetching IP from ${service.url}:`, error.message);
+          // Continue to the next service
+        }
+      }
+
+      // If all services fail, show error message
+      ipDisplay.textContent = 'Error fetching IP address';
+    }
+
+    function copyIP() {
+      const ip = document.getElementById('ipAddress').textContent;
+      navigator.clipboard.writeText(ip).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    // Get the IP address when the page loads
+    window.addEventListener('load', getIPAddress);
+  </script>
+</body>
 </html>
