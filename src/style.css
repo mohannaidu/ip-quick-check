@@ -1,0 +1,375 @@
+:root {
+  /* Material Design 3 color system */
+  --md-sys-color-primary: #6750a4;
+  --md-sys-color-primary-container: #eaddff;
+  --md-sys-color-secondary: #625b71;
+  --md-sys-color-secondary-container: #e8def8;
+  --md-sys-color-tertiary: #7d5260;
+  --md-sys-color-tertiary-container: #ffd8e4;
+  --md-sys-color-surface: #fffbfe;
+  --md-sys-color-surface-variant: #e7e0ec;
+  --md-sys-color-background: #fffbfe;
+  --md-sys-color-error: #b3261e;
+  --md-sys-color-error-container: #f9dedc;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-on-primary-container: #21005d;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-on-secondary-container: #1d192b;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-on-tertiary-container: #31111d;
+  --md-sys-color-on-surface: #1c1b1f;
+  --md-sys-color-on-surface-variant: #49454f;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-on-error-container: #410e0b;
+  --md-sys-color-outline: #79747e;
+  --md-sys-color-inverse-surface: #313033;
+  --md-sys-color-inverse-on-surface: #f4eff4;
+  --md-sys-color-inverse-primary: #d0bcff;
+
+  /* For backward compatibility */
+  --mdc-theme-primary: var(--md-sys-color-primary);
+  --mdc-theme-secondary: var(--md-sys-color-secondary);
+  --mdc-theme-background: var(--md-sys-color-background);
+  --mdc-theme-surface: var(--md-sys-color-surface);
+  --mdc-theme-error: var(--md-sys-color-error);
+  --mdc-theme-on-primary: var(--md-sys-color-on-primary);
+  --mdc-theme-on-secondary: var(--md-sys-color-on-secondary);
+  --mdc-theme-on-surface: var(--md-sys-color-on-surface);
+  --mdc-theme-on-error: var(--md-sys-color-on-error);
+
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  width: 100%;
+}
+
+/* Top App Bar */
+.app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, var(--md-sys-color-primary) 0%, #7c4dff 100%);
+  color: var(--md-sys-color-on-primary);
+  z-index: 4;
+  height: 64px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: header-fade-in 0.5s ease-out;
+}
+
+@keyframes header-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-bar-row {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.app-bar-section {
+  display: flex;
+  align-items: center;
+}
+
+.app-bar-section--start {
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.app-bar-section--end {
+  justify-content: flex-end;
+}
+
+.app-bar-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-left: 8px;
+  position: relative;
+  padding: 4px 0;
+  cursor: default;
+}
+
+.app-bar-title::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--md-sys-color-on-primary);
+  opacity: 0.7;
+  transition: width 0.3s ease;
+}
+
+.app-bar-title:hover::after {
+  width: 100%;
+}
+
+.app-bar-icon {
+  margin-right: 4px;
+  font-size: 24px;
+  animation: icon-pulse 1.5s ease-in-out infinite alternate;
+  --md-icon-color: var(--md-sys-color-on-primary);
+}
+
+@keyframes icon-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.app-bar-action-item {
+  color: var(--md-sys-color-on-primary);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  --md-icon-color: var(--md-sys-color-on-primary);
+}
+
+.app-bar-action-item:hover {
+  opacity: 0.8;
+  transform: rotate(15deg);
+}
+
+/* Main Content */
+.main-content {
+  padding: 80px 16px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+/* IP Card */
+.card {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.ip-card {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card-content {
+  padding: 12px;
+  text-align: center;
+}
+
+.ip-display-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ip-address {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  padding: 0.75rem 1.25rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  word-break: break-all;
+  border: 1px solid var(--md-sys-color-outline);
+  max-width: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.ip-address[style*="display: block"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.ip-text {
+  flex: 1;
+}
+
+
+/* Typography */
+.headline-medium {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 2.25rem;
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
+
+.body-large {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.03125rem;
+  line-height: 1.5rem;
+}
+
+/* Loading Indicator */
+md-circular-progress {
+  --md-circular-progress-size: 36px;
+  --md-circular-progress-active-indicator-color: var(--md-sys-color-primary);
+  --md-circular-progress-track-color: #e6e6e6;
+  --md-circular-progress-four-color-active-indicator-one-color: var(--md-sys-color-primary);
+  --md-circular-progress-four-color-active-indicator-two-color: var(--md-sys-color-tertiary);
+  --md-circular-progress-four-color-active-indicator-three-color: var(--md-sys-color-primary-container);
+  --md-circular-progress-four-color-active-indicator-four-color: var(--md-sys-color-secondary);
+}
+
+/* Buttons */
+md-filled-button {
+  --md-filled-button-container-color: var(--md-sys-color-primary);
+  --md-filled-button-label-text-color: var(--md-sys-color-on-primary);
+  --md-filled-button-icon-color: var(--md-sys-color-on-primary);
+  margin-left: 8px;
+  align-self: center;
+}
+
+md-outlined-button {
+  --md-outlined-button-outline-color: var(--md-sys-color-outline);
+  --md-outlined-button-label-text-color: var(--md-sys-color-primary);
+  --md-outlined-button-icon-color: var(--md-sys-color-primary);
+  margin-left: 8px;
+}
+
+md-text-button {
+  --md-text-button-label-text-color: var(--md-sys-color-primary);
+}
+
+/* Custom Snackbar */
+.custom-snackbar {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  padding: 14px 16px;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0.25s;
+  z-index: 1000;
+}
+
+.custom-snackbar.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.snackbar-message {
+  flex-grow: 1;
+  margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 72px 12px 12px;
+    min-height: 40vh;
+  }
+
+  .ip-card {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .card-content {
+    padding: 8px;
+  }
+
+  .ip-display-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  md-filled-button {
+    margin-left: 8px;
+  }
+
+  .app-bar-title {
+    font-size: 1.1rem;
+  }
+
+  .app-bar-icon,
+  .app-bar-action-item {
+    font-size: 20px;
+  }
+
+  .app-bar-row {
+    padding: 0 8px;
+  }
+
+  .headline-medium {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
