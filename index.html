@@ -6,6 +6,8 @@
   <title>IP Quick Check – Instantly Find Your Public IP Address</title>
   <meta name="description" content="Get your public IP address instantly with IP Quick Check. No clutter, no tracking – just your IP.">
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1318991737801930"
+          crossorigin="anonymous"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -100,8 +102,6 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
 
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -133,6 +133,27 @@
       <button class="copy-btn" onclick="copyIP()">Copy</button>
     </div>
   </div>
+
+  <!-- Privacy Policy Section -->
+  <div id="privacy" class="section">
+    <h2>Privacy Policy</h2>
+    <p>We respect your privacy. This website does not store or collect personal information.</p>
+    <p>Your IP address is shown using browser-based methods and is never saved or shared by us.</p>
+    <p>We may display ads from Google AdSense, which may use cookies to personalize ads. You can manage your ad settings on Google's <a href="https://adssettings.google.com" target="_blank">Ad Settings</a> page.</p>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="section">
+    <h2>Contact</h2>
+    <p>For questions, feedback or support, please email us at <a href="mailto:maxcloud.co@gmail.com">maxcloud.co@gmail.com</a>.</p>
+  </div>
+
+  <!-- Footer Navigation -->
+  <footer>
+    <a href="#privacy">Privacy Policy</a> |
+    <a href="#contact">Contact</a>
+  </footer>
+
 
   <script>
     // Function to fetch with timeout
@@ -196,6 +217,7 @@
 
     // Get the IP address when the page loads
     window.addEventListener('load', getIPAddress);
+
   </script>
 </body>
 </html>
