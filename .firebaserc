@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "ip-quick-check"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
