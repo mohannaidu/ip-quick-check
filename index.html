@@ -55,8 +55,14 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       padding: 2rem;
       max-width: 400px;
-      margin: 0 auto;
+      margin: 2rem auto;
       text-align: center;
+    }
+
+    /* First card specific styles */
+    .container .card {
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     .label {
@@ -95,9 +101,266 @@
       transform: scale(0.96);
     }
 
+    /* Second card specific styles */
+    .card h2 {
+      color: #007BFF;
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.75rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .card h2:first-child {
+      margin-top: 0;
+    }
+
+    .card h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #007BFF, #00c6ff);
+      border-radius: 3px;
+    }
+
+    .card p {
+      color: #505a68;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .card ul {
+      text-align: left;
+      padding-left: 1.5rem;
+      margin: 0.75rem 0 1.5rem;
+    }
+
+    .card li {
+      color: #505a68;
+      margin-bottom: 0.5rem;
+      position: relative;
+      list-style-type: none;
+      padding-left: 1.5rem;
+    }
+
+    .card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #007BFF;
+      font-weight: bold;
+    }
+
+    .card strong {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .card em {
+      display: block;
+      margin-top: 1.5rem;
+      color: #007BFF;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* FAQ section styling */
+    .card p strong + br {
+      display: none;
+    }
+
+    .card p strong {
+      display: block;
+      background-color: #f0f7ff;
+      padding: 0.75rem 1rem;
+      border-left: 3px solid #007BFF;
+      margin-bottom: 0.5rem;
+      text-align: left;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Related Tools section styling - bullet points instead of checkmarks */
+    .card .related-tools li::before {
+      content: '•';
+      font-size: 1.2rem;
+    }
+
+    /* Section styling */
+    .section {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      max-width: 400px;
+      margin: 2rem auto;
+      text-align: left;
+      animation: slideUp 0.6s ease-out;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      color: #007BFF;
+      font-size: 1.5rem;
+      margin: 0 0 1rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #007BFF, #00c6ff);
+      border-radius: 3px;
+    }
+
+    .section p {
+      color: #505a68;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .section a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .section a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    /* Footer styling */
+    footer {
+      max-width: 600px;
+      margin: 2rem auto 3rem;
+      padding: 1.5rem;
+      text-align: center;
+      color: #505a68;
+      border-top: 1px solid rgba(0, 123, 255, 0.2);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    footer a {
+      color: #007BFF;
+      text-decoration: none;
+      margin: 0 0.75rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #007BFF;
+      transition: width 0.3s ease;
+    }
+
+    footer a:hover::after {
+      width: 100%;
+    }
+
+    .copyright {
+      color: #8a9aad;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Animations */
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 650px) {
+      .container {
+        padding: 1rem 1.25rem;
+      }
+
+      .card, .section {
+        padding: 1.5rem;
+        margin: 1.5rem 1rem;
+        width: auto;
+        max-width: calc(100% - 2rem);
+        box-sizing: border-box;
+      }
+
+      /* Ensure first card maintains its styling while respecting mobile margins */
+      .container .card {
+        margin: 0 auto;
+        max-width: 400px;
+      }
+
+      .card h2, .section h2 {
+        font-size: 1.3rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      footer {
+        padding: 1rem;
+        margin: 1.5rem auto 2rem;
+        gap: 0.75rem;
+      }
+
+      footer a {
+        margin: 0 0.5rem;
+        display: inline-block;
+        padding: 0.25rem 0;
+      }
+
+      .copyright {
+        margin-top: 0.25rem;
+      }
+    }
+
+    /* Ensure animations don't run for users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .card, .section, header {
+        animation: none;
+      }
+
+      .card, .section {
+        transition: none;
+      }
     }
   </style>
   <script type="module">
@@ -136,6 +399,47 @@
     </div>
   </div>
 
+  <div class="card">
+    <h2>What is an IP Address?</h2>
+    <p>An IP address is a unique numeric label assigned to your device when it connects to the internet. It functions like a postal address for online communication.</p>
+
+    <h2>Why Does IP Location Matter?</h2>
+    <ul>
+      <li>Reveals approximate city & country</li>
+      <li>Shows your ISP</li>
+      <li>Affects content personalization and ad targeting</li>
+    </ul>
+
+    <h2>How to Change or Hide Your IP</h2>
+    <ul>
+      <li>Use a VPN</li>
+      <li>Browse via a proxy server</li>
+      <li>Use mobile data instead of Wi‑Fi</li>
+    </ul>
+
+    <h2>Common Uses for IP Lookup</h2>
+    <ul>
+      <li>Internet troubleshooting</li>
+      <li>VPN verification</li>
+      <li>Detecting unusual activity</li>
+    </ul>
+
+    <h2>FAQ</h2>
+    <p><strong>Can someone hack me through my IP?</strong><br>Typically no, unless your device or network is insecure.</p>
+    <p><strong>Is my IP permanent?</strong><br>No, most home ISPs issue dynamic IPs that change periodically.</p>
+    <p><strong>Does an IP show my exact location?</strong><br>No. It can show the general area but not your address.</p>
+
+    <h2>Related Tools</h2>
+    <ul class="related-tools">
+      <li><a href="https://tools.keycdn.com/ping" target="_blank">Ping Test Tool</a> – Check your internet response time</li>
+      <li><a href="https://dnschecker.org/all-dns-records-of-domain.php" target="_blank">DNS Lookup Tool</a> – See your domain's DNS records</li>
+      <li><a href="https://mxtoolbox.com/blacklists.aspx" target="_blank">IP Blacklist Check</a> – Find out if your IP is blocked</li>
+    </ul>
+
+    <p><em>Bookmark this page to check your IP in one click.</em></p>
+  </div>
+
+
   <!-- Privacy Policy Section -->
   <div id="privacy" class="section">
     <h2>Privacy Policy</h2>
@@ -152,10 +456,8 @@
 
   <!-- Footer Navigation -->
   <footer>
-    <a href="#privacy">Privacy Policy</a> |
-    <a href="#contact">Contact</a>
+    <div class="copyright">© 2025 IP Quick Check</div>
   </footer>
-
 
   <script>
     // Function to fetch with timeout
