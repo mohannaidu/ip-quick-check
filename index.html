@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IP Quick Check – Instantly Find Your Public IP Address</title>
   <meta name="description" content="Get your public IP address instantly with IP Quick Check. No clutter, no tracking – just your IP.">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1318991737801930"
           crossorigin="anonymous"></script>
   <script type="application/ld+json">
@@ -17,276 +22,405 @@
     }
   </script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f7fa;
+    :root {
+      /* Light mode color palette */
+      --primary: #0284c7; /* Blue */
+      --primary-dark: #0369a1;
+      --primary-light: #7dd3fc;
+      --secondary: #6366f1; /* Indigo */
+      --secondary-dark: #4f46e5;
+      --accent: #f59e0b; /* Amber */
+      --surface: #ffffff; /* White surface */
+      --surface-elevated: #ffffff; /* White for cards */
+      --background: #f8fafc; /* Very light gray background */
+      --on-primary: #ffffff;
+      --on-surface: #334155; /* Slate 700 */
+      --on-background: #475569; /* Slate 600 */
+      --muted: #94a3b8; /* Slate 400 */
+      --error: #ef4444;
+      --success: #22c55e;
+      --border: #e2e8f0; /* Slate 200 */
+      --glow: 0 0 15px rgba(2, 132, 199, 0.15); /* Subtle blue glow effect */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      
+      /* Typography */
+      --font-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      color: #2c3e50;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--background);
+      color: var(--on-background);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Layout */
     .container {
-      max-width: 600px;
-      margin: 3rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    header {
-      margin-bottom: 2rem;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 0.2rem 0;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #666;
-      margin: 0.5rem 0 0;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      max-width: 400px;
-      margin: 2rem auto;
-      text-align: center;
-    }
-
-    /* First card specific styles */
-    .container .card {
-      max-width: 400px;
+      width: 100%;
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    /* Header */
+    .site-header {
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: 2rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .site-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+      color: var(--on-primary);
+    }
+
+    .site-description {
+      font-size: 1.125rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-body {
+      padding: 1.75rem;
+    }
+
+    /* IP Card */
+    .ip-card {
+      max-width: 500px;
+      margin: -2.5rem auto 3rem;
+      position: relative;
+      z-index: 2;
+      text-align: center;
     }
 
     .label {
-      color: #666;
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
+      color: var(--muted);
+      font-size: 0.875rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .ip-display-container {
+      position: relative;
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      margin: 0 auto 1.5rem;
+      max-width: 90%;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+    
+    .ip-display-container:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--primary-light);
     }
 
     .ip-value {
-      font-size: 2rem;
+      font-family: var(--font-mono);
+      font-size: 2.25rem;
       font-weight: 600;
-      margin-bottom: 1rem;
-      line-height: 1.2;
+      color: var(--primary);
       animation: fadeIn 0.6s ease-in-out;
       word-break: break-word;
+      min-height: 2.75rem;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    
+    /* Loading animation */
+    .ip-value.loading {
+      position: relative;
+      color: transparent;
+    }
+    
+    .ip-value.loading::after {
+      content: "Loading...";
+      position: absolute;
+      left: 0;
+      right: 0;
+      color: var(--primary);
+      opacity: 0.7;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     .copy-btn {
-      background: #007BFF;
-      color: white;
+      background: var(--primary);
+      color: var(--on-primary);
       border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.5rem;
       font-size: 0.95rem;
-      transition: background 0.3s ease;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-sm);
     }
 
     .copy-btn:hover {
-      background: #0056b3;
+      background: var(--primary-dark);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
     }
 
     .copy-btn:active {
-      transform: scale(0.96);
+      transform: translateY(0);
     }
 
-    /* Second card specific styles */
+    .material-symbols-outlined {
+      font-size: 1.25rem;
+    }
+
+    /* Content Cards */
+    .content-card {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
     .card h2 {
-      color: #007BFF;
-      font-size: 1.5rem;
-      margin: 1.5rem 0 0.75rem;
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin: 0 0 1.25rem;
       position: relative;
       padding-bottom: 0.5rem;
-    }
-
-    .card h2:first-child {
-      margin-top: 0;
-    }
-
-    .card h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #007BFF, #00c6ff);
-      border-radius: 3px;
+      border-bottom: 1px solid var(--border);
     }
 
     .card p {
-      color: #505a68;
+      margin-bottom: 1.5rem;
+      color: var(--on-background);
       line-height: 1.6;
-      margin-bottom: 1rem;
-      text-align: left;
     }
 
     .card ul {
-      text-align: left;
-      padding-left: 1.5rem;
-      margin: 0.75rem 0 1.5rem;
+      padding-left: 1rem;
+      margin: 0 0 1.5rem;
     }
 
     .card li {
-      color: #505a68;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       position: relative;
       list-style-type: none;
       padding-left: 1.5rem;
+      color: var(--on-background);
     }
 
     .card li::before {
       content: '✓';
       position: absolute;
       left: 0;
-      color: #007BFF;
+      color: var(--primary);
       font-weight: bold;
     }
 
     .card strong {
-      color: #2c3e50;
+      color: var(--on-surface);
       font-weight: 600;
     }
 
     .card em {
       display: block;
       margin-top: 1.5rem;
-      color: #007BFF;
+      color: var(--primary);
       font-style: italic;
       font-weight: 500;
+      text-align: center;
     }
 
     /* FAQ section styling */
+    .card p strong {
+      display: block;
+      background-color: rgba(2, 132, 199, 0.05);
+      padding: 0.75rem 1rem;
+      border-left: 3px solid var(--primary);
+      margin-bottom: 0.75rem;
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+
     .card p strong + br {
       display: none;
     }
 
-    .card p strong {
-      display: block;
-      background-color: #f0f7ff;
-      padding: 0.75rem 1rem;
-      border-left: 3px solid #007BFF;
-      margin-bottom: 0.5rem;
-      text-align: left;
-      border-radius: 0 8px 8px 0;
+    /* Related Tools section styling */
+    .card .related-tools li {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 0.25rem;
+      padding: 0.75rem 1rem 0.75rem 2rem;
+      margin-bottom: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .card .related-tools li:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-sm);
     }
 
-    /* Related Tools section styling - bullet points instead of checkmarks */
     .card .related-tools li::before {
       content: '•';
-      font-size: 1.2rem;
+      font-size: 1.25rem;
+      color: var(--primary);
+      left: 0.75rem;
+      top: 0.75rem;
+    }
+    
+    .card .related-tools a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .card .related-tools a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
     }
 
     /* Section styling */
     .section {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      max-width: 400px;
-      margin: 2rem auto;
-      text-align: left;
+      background: var(--surface);
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
       animation: slideUp 0.6s ease-out;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
     }
-
+    
     .section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-md);
     }
 
     .section h2 {
-      color: #007BFF;
-      font-size: 1.5rem;
-      margin: 0 0 1rem;
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin: 0 0 1.25rem;
       position: relative;
       padding-bottom: 0.5rem;
-      display: inline-block;
-    }
-
-    .section h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #007BFF, #00c6ff);
-      border-radius: 3px;
+      border-bottom: 1px solid var(--border);
     }
 
     .section p {
-      color: #505a68;
+      margin-bottom: 1.25rem;
       line-height: 1.6;
-      margin-bottom: 1rem;
     }
 
     .section a {
-      color: #007BFF;
+      color: var(--primary);
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
     }
 
     .section a:hover {
-      color: #0056b3;
+      color: var(--primary-dark);
       text-decoration: underline;
     }
 
     /* Footer styling */
     footer {
-      max-width: 600px;
-      margin: 2rem auto 3rem;
-      padding: 1.5rem;
+      margin-top: auto;
+      padding: 2rem 0;
       text-align: center;
-      color: #505a68;
-      border-top: 1px solid rgba(0, 123, 255, 0.2);
+      color: var(--muted);
       font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    footer a {
-      color: #007BFF;
-      text-decoration: none;
-      margin: 0 0.75rem;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    footer a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -3px;
-      left: 0;
-      background-color: #007BFF;
-      transition: width 0.3s ease;
-    }
-
-    footer a:hover::after {
-      width: 100%;
+      border-top: 1px solid var(--border);
+      background: var(--background);
     }
 
     .copyright {
-      color: #8a9aad;
-      font-size: 0.85rem;
       margin-top: 0.5rem;
-      letter-spacing: 0.5px;
+    }
+    
+    .copyright::before {
+      content: '© ';
     }
 
     /* Animations */
@@ -305,60 +439,199 @@
         transform: translateY(0);
       }
     }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    /* Ad container */
+    .ad-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+      padding: 1rem;
+      background: var(--background);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .ad-container::before {
+      content: 'Advertisement';
+      position: absolute;
+      top: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface);
+      padding: 0.15rem 0.75rem;
+      border-radius: 0.25rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* Mobile view specific styles */
+    .mobile-view {
+      transform: none !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    .mobile-view:active {
+      opacity: 0.9 !important;
+    }
 
     /* Responsive adjustments */
-    @media (max-width: 650px) {
+    @media (max-width: 992px) {
       .container {
-        padding: 1rem 1.25rem;
+        max-width: 100%;
       }
+      
+      .row {
+        flex-direction: column;
+      }
+      
+      .col {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      
+      .content-card, .section {
+        max-width: 100%;
+      }
+    }
 
-      .card, .section {
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 1.75rem 0 3.5rem;
+      }
+      
+      .site-title {
+        font-size: 2.25rem;
+      }
+      
+      .site-description {
+        font-size: 1rem;
+      }
+      
+      .card-body {
         padding: 1.5rem;
-        margin: 1.5rem 1rem;
-        width: auto;
-        max-width: calc(100% - 2rem);
-        box-sizing: border-box;
       }
-
-      /* Ensure first card maintains its styling while respecting mobile margins */
-      .container .card {
-        margin: 0 auto;
-        max-width: 400px;
+      
+      .ip-value {
+        font-size: 1.75rem;
       }
-
+      
+      .ip-display-container {
+        max-width: 95%;
+      }
+      
       .card h2, .section h2 {
         font-size: 1.3rem;
       }
-
-      header h1 {
-        font-size: 2rem;
+      
+      .ip-card {
+        margin-top: -2rem;
       }
+    }
 
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .site-header {
+        padding: 1.5rem 0 3rem;
+      }
+      
+      .site-title {
+        font-size: 1.75rem;
+      }
+      
+      .ip-card {
+        margin-top: -1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .card-body {
+        padding: 1.25rem;
+      }
+      
+      .ip-value {
+        font-size: 1.5rem;
+      }
+      
+      .ip-display-container {
+        padding: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      .copy-btn {
+        padding: 0.6rem 1rem;
+        width: 100%;
+        margin-top: 0.5rem;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+      
+      .card h2, .section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .card p, .section p {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      .card li, .section li {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.25rem;
+      }
+      
+      .section {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+      
       footer {
+        padding: 1.5rem 0;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .site-title {
+        font-size: 1.5rem;
+      }
+      
+      .ip-value {
+        font-size: 1.25rem;
+      }
+      
+      .card-body {
         padding: 1rem;
-        margin: 1.5rem auto 2rem;
-        gap: 0.75rem;
       }
-
-      footer a {
-        margin: 0 0.5rem;
-        display: inline-block;
-        padding: 0.25rem 0;
-      }
-
-      .copyright {
-        margin-top: 0.25rem;
+      
+      .label {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
       }
     }
 
     /* Ensure animations don't run for users who prefer reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .card, .section, header {
+      .card, .section, .ip-value {
         animation: none;
       }
 
       .card, .section {
         transition: none;
+      }
+      
+      html {
+        scroll-behavior: auto;
       }
     }
   </style>
@@ -385,101 +658,123 @@
   </script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>IP Quick Check</h1>
-      <p>Instantly find your public IPv4 address – no clutter, no tracking.</p>
-    </header>
-
-    <div class="card">
-      <div class="label">Your IPv4 Address</div>
-      <div class="ip-value" id="ipAddress">Loading...</div>
-      <button class="copy-btn" onclick="copyIP()">Copy</button>
+  <!-- Header Section -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="site-title">IP Quick Check</h1>
+        <p class="site-description">Instantly find your public IPv4 address – no clutter, no tracking.</p>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="card">
-    <h2>What is an IP Address?</h2>
-    <p>An IP address is a unique numeric label assigned to your device when it connects to the internet. It functions like a postal address for online communication.</p>
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <!-- IP Card -->
+      <div class="card ip-card">
+        <div class="card-body">
+          <div class="label" id="ip-label">Your IPv4 Address</div>
+          <div class="ip-display-container" aria-live="polite">
+            <div class="ip-value loading" id="ipAddress" aria-labelledby="ip-label"></div>
+          </div>
+          <button class="copy-btn" onclick="copyIP()" aria-label="Copy IP address to clipboard">
+            <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
 
-    <!-- Google AdSense Ad Unit -->
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center; margin:20px 0;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-1318991737801930"
-         data-ad-slot="3594982915"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+      <!-- Information Card -->
+      <div class="card content-card">
+        <div class="card-body">
+          <h2>What is an IP Address?</h2>
+          <p>An IP address is a unique numeric label assigned to your device when it connects to the internet. It functions like a postal address for online communication.</p>
 
-    <h2>Why Does IP Location Matter?</h2>
-    <ul>
-      <li>Reveals approximate city & country</li>
-      <li>Shows your ISP</li>
-      <li>Affects content personalization and ad targeting</li>
-    </ul>
+          <!-- Google AdSense Ad Unit -->
+          <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-1318991737801930"
+                 data-ad-slot="3594982915"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
 
-    <h2>How to Change or Hide Your IP</h2>
-    <ul>
-      <li>Use a VPN</li>
-      <li>Browse via a proxy server</li>
-      <li>Use mobile data instead of Wi‑Fi</li>
-    </ul>
+          <h2>Why Does IP Location Matter?</h2>
+          <ul>
+            <li>Reveals approximate city & country</li>
+            <li>Shows your ISP</li>
+            <li>Affects content personalization and ad targeting</li>
+          </ul>
 
-    <h2>Common Uses for IP Lookup</h2>
-    <ul>
-      <li>Internet troubleshooting</li>
-      <li>VPN verification</li>
-      <li>Detecting unusual activity</li>
-    </ul>
+          <h2>How to Change or Hide Your IP</h2>
+          <ul>
+            <li>Use a VPN</li>
+            <li>Browse via a proxy server</li>
+            <li>Use mobile data instead of Wi‑Fi</li>
+          </ul>
 
-    <h2>FAQ</h2>
-    <p><strong>Can someone hack me through my IP?</strong><br>Typically no, unless your device or network is insecure.</p>
-    <p><strong>Is my IP permanent?</strong><br>No, most home ISPs issue dynamic IPs that change periodically.</p>
-    <p><strong>Does an IP show my exact location?</strong><br>No. It can show the general area but not your address.</p>
+          <h2>Common Uses for IP Lookup</h2>
+          <ul>
+            <li>Internet troubleshooting</li>
+            <li>VPN verification</li>
+            <li>Detecting unusual activity</li>
+          </ul>
 
-    <h2>Related Tools</h2>
-    <ul class="related-tools">
-      <li><a href="https://tools.keycdn.com/ping" target="_blank">Ping Test Tool</a> – Check your internet response time</li>
-      <li><a href="https://dnschecker.org/all-dns-records-of-domain.php" target="_blank">DNS Lookup Tool</a> – See your domain's DNS records</li>
-      <li><a href="https://mxtoolbox.com/blacklists.aspx" target="_blank">IP Blacklist Check</a> – Find out if your IP is blocked</li>
-    </ul>
+          <h2>FAQ</h2>
+          <p><strong>Can someone hack me through my IP?</strong><br>Typically no, unless your device or network is insecure.</p>
+          <p><strong>Is my IP permanent?</strong><br>No, most home ISPs issue dynamic IPs that change periodically.</p>
+          <p><strong>Does an IP show my exact location?</strong><br>No. It can show the general area but not your address.</p>
 
-    <p><em>Bookmark this page to check your IP in one click.</em></p>
-  </div>
+          <h2>Related Tools</h2>
+          <ul class="related-tools">
+            <li><a href="https://tools.keycdn.com/ping" target="_blank">Ping Test Tool</a> – Check your internet response time</li>
+            <li><a href="https://dnschecker.org/all-dns-records-of-domain.php" target="_blank">DNS Lookup Tool</a> – See your domain's DNS records</li>
+            <li><a href="https://mxtoolbox.com/blacklists.aspx" target="_blank">IP Blacklist Check</a> – Find out if your IP is blocked</li>
+          </ul>
 
+          <p><em>Bookmark this page to check your IP in one click.</em></p>
+        </div>
+      </div>
 
-  <!-- Privacy Policy Section -->
-  <div id="privacy" class="section">
-    <h2>Privacy Policy</h2>
-    <p>We respect your privacy. This website does not store or collect personal information.</p>
-    <p>Your IP address is shown using browser-based methods and is never saved or shared by us.</p>
-    <p>We may display ads from Google AdSense, which may use cookies to personalize ads. You can manage your ad settings on Google's <a href="https://adssettings.google.com" target="_blank">Ad Settings</a> page.</p>
-  </div>
+      <!-- Privacy Policy Section -->
+      <div id="privacy" class="section">
+        <h2>Privacy Policy</h2>
+        <p>We respect your privacy. This website does not store or collect personal information.</p>
+        <p>Your IP address is shown using browser-based methods and is never saved or shared by us.</p>
+        <p>We may display ads from Google AdSense, which may use cookies to personalize ads. You can manage your ad settings on Google's <a href="https://adssettings.google.com" target="_blank">Ad Settings</a> page.</p>
+      </div>
 
-  <!-- Contact Section -->
-  <div id="contact" class="section">
-    <h2>Contact</h2>
-    <p>For questions, feedback or support, please email us at <a href="mailto:maxcloud.co@gmail.com">maxcloud.co@gmail.com</a>.</p>
-  </div>
+      <!-- Contact Section -->
+      <div id="contact" class="section">
+        <h2>Contact</h2>
+        <p>For questions, feedback or support, please email us at <a href="mailto:maxcloud.co@gmail.com">maxcloud.co@gmail.com</a>.</p>
+      </div>
 
-  <!-- Google AdSense Ad Unit -->
-  <div style="max-width:600px; margin:2rem auto; text-align:center;">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-1318991737801930"
-         data-ad-slot="1234567890"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
+      <!-- Google AdSense Ad Unit -->
+      <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1318991737801930"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </div>
+  </main>
 
-  <!-- Footer Navigation -->
+  <!-- Footer -->
   <footer>
-    <div class="copyright">© 2025 IP Quick Check</div>
+    <div class="container">
+      <div class="copyright">© 2025 IP Quick Check</div>
+    </div>
   </footer>
 
   <script>
@@ -505,6 +800,16 @@
       ];
 
       const ipDisplay = document.getElementById('ipAddress');
+      const ipContainer = document.querySelector('.ip-display-container');
+      
+      // Replace the loading text with animated dots
+      ipDisplay.innerHTML = `
+        <div class="loading-animation">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      `;
 
       // Try each service until one succeeds
       for (const service of ipServices) {
@@ -519,8 +824,24 @@
           const data = await response.json();
           const ip = service.parser(data);
 
-          // Display the IP address
+          // Add a slight delay for better UX
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          // Display the IP address with a fade-in effect
+          ipDisplay.classList.remove('loading');
+          ipDisplay.innerHTML = '';
           ipDisplay.textContent = ip;
+          
+          // Add a subtle highlight effect
+          ipContainer.style.transition = 'all 0.3s ease';
+          ipContainer.style.borderColor = 'var(--primary-light)';
+          ipContainer.style.boxShadow = 'var(--shadow-md)';
+          
+          setTimeout(() => {
+            ipContainer.style.borderColor = '';
+            ipContainer.style.boxShadow = '';
+          }, 1000);
+          
           console.log(`Successfully fetched IP from ${service.url}: ${ip}`);
           return; // Exit the function if successful
         } catch (error) {
@@ -530,21 +851,256 @@
       }
 
       // If all services fail, show error message
+      ipDisplay.innerHTML = '';
       ipDisplay.textContent = 'Error fetching IP address';
+      ipDisplay.classList.remove('loading');
+      ipDisplay.classList.add('error');
+      ipContainer.classList.add('error');
     }
+    
+    // Add error and loading styling
+    document.head.insertAdjacentHTML('beforeend', `
+      <style>
+        .ip-value.error {
+          color: var(--error);
+          font-size: 1.5rem;
+          position: relative;
+          padding-left: 1.5rem;
+        }
+        
+        .ip-value.error::before {
+          content: "!";
+          position: absolute;
+          left: 0;
+          top: 0.25rem;
+          background: var(--error);
+          color: white;
+          width: 1.25rem;
+          height: 1.25rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.9rem;
+          font-weight: bold;
+        }
+        
+        .ip-display-container.error {
+          border-color: var(--error);
+        }
+        
+        .loading-animation {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: center;
+          align-items: center;
+          height: 2.75rem;
+        }
+        
+        .loading-dot {
+          width: 0.5rem;
+          height: 0.5rem;
+          background: var(--primary);
+          border-radius: 50%;
+          animation: loadingPulse 1.5s infinite ease-in-out;
+        }
+        
+        .loading-dot:nth-child(2) {
+          animation-delay: 0.2s;
+          background: var(--primary);
+          opacity: 0.7;
+        }
+        
+        .loading-dot:nth-child(3) {
+          animation-delay: 0.4s;
+          background: var(--primary);
+          opacity: 0.4;
+        }
+        
+        @keyframes loadingPulse {
+          0%, 100% { transform: scale(0.5); opacity: 0.5; }
+          50% { transform: scale(1); opacity: 1; }
+        }
+      </style>
+    `);
 
     function copyIP() {
-      const ip = document.getElementById('ipAddress').textContent;
+      const ipDisplay = document.getElementById('ipAddress');
+      const ip = ipDisplay.textContent;
+      const btn = document.querySelector('.copy-btn');
+      const originalContent = btn.innerHTML;
+      
+      // Don't try to copy if there's an error or still loading
+      if (ipDisplay.classList.contains('error') || ipDisplay.classList.contains('loading')) {
+        // Show error feedback
+        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Cannot copy';
+        btn.classList.add('copy-error');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('copy-error');
+        }, 2000);
+        return;
+      }
+      
+      // Create a tooltip/notification element
+      const notification = document.createElement('div');
+      notification.className = 'copy-notification';
+      notification.setAttribute('role', 'status');
+      notification.setAttribute('aria-live', 'polite');
+      
+      // Try to copy using the clipboard API
       navigator.clipboard.writeText(ip).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 2000);
+        // Success feedback
+        btn.innerHTML = '<span class="material-symbols-outlined">check</span> Copied!';
+        btn.classList.add('copy-success');
+        
+        // Show floating notification
+        notification.textContent = 'IP address copied to clipboard!';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 2000);
+        
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('copy-success');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        
+        // Fallback for browsers that don't support clipboard API
+        try {
+          const textArea = document.createElement('textarea');
+          textArea.value = ip;
+          // Make the textarea accessible to screen readers but visually hidden
+          textArea.style.position = 'absolute';
+          textArea.style.left = '-9999px';
+          textArea.setAttribute('aria-hidden', 'true');
+          textArea.setAttribute('tabindex', '-1');
+          
+          document.body.appendChild(textArea);
+          textArea.select();
+          const successful = document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          if (successful) {
+            // Success feedback
+            btn.innerHTML = '<span class="material-symbols-outlined">check</span> Copied!';
+            btn.classList.add('copy-success');
+            
+            // Show floating notification
+            notification.textContent = 'IP address copied to clipboard!';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+              notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+              notification.classList.remove('show');
+              setTimeout(() => {
+                document.body.removeChild(notification);
+              }, 300);
+            }, 2000);
+          } else {
+            throw new Error('Copy command failed');
+          }
+        } catch (err) {
+          // Error feedback
+          btn.innerHTML = '<span class="material-symbols-outlined">error</span> Failed to copy';
+          btn.classList.add('copy-error');
+          console.error('Fallback copy failed:', err);
+        }
+        
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('copy-success');
+          btn.classList.remove('copy-error');
+        }, 2000);
       });
     }
+    
+    // Add copy button styles
+    document.head.insertAdjacentHTML('beforeend', `
+      <style>
+        .copy-success {
+          background: var(--primary-dark) !important;
+          color: var(--on-primary) !important;
+        }
+        
+        .copy-error {
+          background: rgba(239, 68, 68, 0.9) !important;
+          color: white !important;
+        }
+        
+        .copy-notification {
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%) translateY(100px);
+          background: var(--surface);
+          color: var(--on-surface);
+          padding: 0.75rem 1.25rem;
+          border-radius: 0.5rem;
+          box-shadow: var(--shadow-md);
+          border: 1px solid var(--border);
+          z-index: 1000;
+          opacity: 0;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          font-size: 0.9rem;
+          max-width: 90%;
+          text-align: center;
+        }
+        
+        .copy-notification.show {
+          transform: translateX(-50%) translateY(0);
+          opacity: 1;
+        }
+        
+        /* Focus styles for accessibility */
+        .copy-btn:focus {
+          outline: 2px solid var(--primary);
+          outline-offset: 2px;
+        }
+        
+        /* Skip focus outline when using mouse */
+        .copy-btn:focus:not(:focus-visible) {
+          outline: none;
+        }
+      </style>
+    `);
 
     // Get the IP address when the page loads
     window.addEventListener('load', getIPAddress);
 
+    // Add responsive behavior for mobile devices
+    function checkViewportSize() {
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const elements = document.querySelectorAll('.card, .section');
+      
+      if (vw <= 576) {
+        elements.forEach(el => {
+          el.classList.add('mobile-view');
+        });
+      } else {
+        elements.forEach(el => {
+          el.classList.remove('mobile-view');
+        });
+      }
+    }
+
+    // Check on load and resize
+    window.addEventListener('load', checkViewportSize);
+    window.addEventListener('resize', checkViewportSize);
   </script>
 </body>
 </html>
