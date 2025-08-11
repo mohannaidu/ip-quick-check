@@ -213,12 +213,14 @@
     
     .ip-value.loading::after {
       content: "Loading...";
-      position: absolute;
       left: 0;
       right: 0;
+      top: 50%;
+      transform: translateY(-50%);
       color: var(--primary);
       opacity: 0.7;
       animation: pulse 1.5s infinite ease-in-out;
+      text-align: center;
     }
     
     @keyframes pulse {
@@ -955,14 +957,9 @@
       const ipDisplay = document.getElementById('ipAddress');
       const ipContainer = document.querySelector('.ip-display-container');
       
-      // Replace the loading text with animated dots
-      ipDisplay.innerHTML = `
-        <div class="loading-animation">
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
-          <div class="loading-dot"></div>
-        </div>
-      `;
+      // Ensure the loading class is applied (which will display the centered "Loading..." text via CSS)
+      ipDisplay.classList.add('loading');
+      ipDisplay.innerHTML = "";
 
       // Try each service until one succeeds
       for (const service of ipServices) {
@@ -1042,38 +1039,7 @@
           border-color: var(--error);
         }
         
-        .loading-animation {
-          display: flex;
-          gap: 0.5rem;
-          justify-content: center;
-          align-items: center;
-          height: 2.75rem;
-        }
-        
-        .loading-dot {
-          width: 0.5rem;
-          height: 0.5rem;
-          background: var(--primary);
-          border-radius: 50%;
-          animation: loadingPulse 1.5s infinite ease-in-out;
-        }
-        
-        .loading-dot:nth-child(2) {
-          animation-delay: 0.2s;
-          background: var(--primary);
-          opacity: 0.7;
-        }
-        
-        .loading-dot:nth-child(3) {
-          animation-delay: 0.4s;
-          background: var(--primary);
-          opacity: 0.4;
-        }
-        
-        @keyframes loadingPulse {
-          0%, 100% { transform: scale(0.5); opacity: 0.5; }
-          50% { transform: scale(1); opacity: 1; }
-        }
+        /* Removed unused loading animation styles */
       </style>
     `);
 
